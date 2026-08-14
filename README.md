@@ -117,41 +117,8 @@ east_wind_wellness/
                                automatically, not included in the download)
 ```
 
-## 9. Putting this on GitHub
 
-This project is already set up for it - `.gitignore` excludes the database,
-`__pycache__`, and any virtual environment folder, and `requirements.txt`
-means anyone who clones it can get running with `pip install -r
-requirements.txt`.
-
-The one thing to know: `app.py` will use a `FLASK_SECRET_KEY` environment
-variable if you set one, and otherwise falls back to a default value so the
-app still runs out of the box. That default is fine for a private/class
-repo. If your repo will be public, you can set your own before running:
-
-```bash
-export FLASK_SECRET_KEY="something-random-and-long"   # on Windows (cmd): set FLASK_SECRET_KEY=something-random-and-long
-python3 app.py
-```
-
-To actually create the repo:
-
-```bash
-cd east_wind_wellness
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<repo-name>.git
-git push -u origin main
-```
-
-Create the empty repository on GitHub first (don't let GitHub auto-add a
-README, .gitignore or license there, since this project already has a
-README and .gitignore - ticking those boxes on GitHub would cause a merge
-conflict on your first push).
-
-## 10. Common issues
+## 9. Common issues
 
 - **"ModuleNotFoundError: No module named 'flask'"** - you forgot to run
   `pip install -r requirements.txt` (or you're not inside the virtual
