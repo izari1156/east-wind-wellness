@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit Item' if item else 'Add New Item' }}{% endblock %}
+{% block content %}
+
+<section class="section">
+  <div class="form-card">
+    <h1>{{ 'Edit Item' if item else 'Add New Item' }}</h1>
+    <form method="POST" class="stacked-form" enctype="multipart/form-data">
+      <label>Category *
+        <select name="category" required>
+          <option value="herb" {{ 'selected' if item and item.category == 'herb' }}>Herb</option>
+          <option value="service" {{ 'selected' if item and item.category == 'service' }}>Service</option>
+        </select>
+      </label>
+      <label>Name *
+        <input type="text" name="name" value="{{ item.name if item else '' }}" required>
+      </label>
+      <label>Tagline
+        <input type="text" name="tagline" value="{{ item.tagline if item else '' }}">
+      </label>
+      <label>Description
+        <textarea name="description" rows="5">{{ item.description if item else '' }}</textarea>
+      </label>
+      <label>Image
+        {% if item %}
+        <img src="{{ url_for('static', filename='images/' + item.image_file) }}" alt="{{ item.name }}" class="thumb" style="display:block;margin-bottom:8px;">
+        {% endif %}
+        <input type="file" name="image" accept="image/*">
+        <span class="muted small">{{ 'Leave empty to keep the current image.' if item else 'Optional - a placeholder image will be used if left empty.' }}</span>
+      </label>
+
+      <button type="submit" class="btn btn-primary btn-block">{{ 'Save Changes' if item else 'Add Item' }}</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

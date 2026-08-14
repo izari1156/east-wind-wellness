@@ -1,0 +1,4 @@
+# East Wind Wellness only needs Flask itself.
+# Everything else (the database, password hashing, sessions) uses
+# Python's own standard library plus tools that ship inside Flask.
+Flask>=2.3,<4.0

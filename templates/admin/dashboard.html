@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+
+<section class="section">
+  <div class="section-inner">
+    <h1>Admin Dashboard</h1>
+    <p class="muted">Welcome back, {{ current_user.name }}. Here's what's happening at {{ shop.name }}.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-number">{{ counts.pending }}</span>
+        <span class="stat-label">Pending Appointments</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{{ counts.confirmed }}</span>
+        <span class="stat-label">Confirmed Appointments</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{{ counts.total_appointments }}</span>
+        <span class="stat-label">Total Appointments</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{{ counts.total_users }}</span>
+        <span class="stat-label">Registered Customers</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{{ counts.total_items }}</span>
+        <span class="stat-label">Products &amp; Services</span>
+      </div>
+    </div>
+
+    <div class="admin-links">
+      <a href="{{ url_for('admin_appointments') }}" class="btn btn-primary">Manage Appointments</a>
+      <a href="{{ url_for('admin_items') }}" class="btn btn-ghost">Manage Products &amp; Services</a>
+    </div>
+
+    <div class="section-heading">
+      <h2>Upcoming Appointments</h2>
+    </div>
+    {% if upcoming %}
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Customer</th><th>Service</th><th>Date</th><th>Time</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          {% for a in upcoming %}
+          <tr>
+            <td>{{ a.full_name }}</td>
+            <td>{{ a.service_name }}</td>
+            <td>{{ a.preferred_date }}</td>
+            <td>{{ a.preferred_time }}</td>
+            <td><span class="status-pill status-{{ a.status }}">{{ a.status }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="muted">No upcoming appointments right now.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Manage Products &amp; Services{% endblock %}
+{% block content %}
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-heading">
+      <h2>Manage Products &amp; Services</h2>
+      <a href="{{ url_for('admin_new_item') }}" class="btn btn-primary btn-small">+ Add New Item</a>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Image</th><th>Category</th><th>Name</th><th>Tagline</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td><img src="{{ url_for('static', filename='images/' + item.image_file) }}" alt="{{ item.name }}" class="thumb"></td>
+            <td>{{ item.category | capitalize }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.tagline }}</td>
+            <td class="row-actions">
+              <a href="{{ url_for('admin_edit_item', item_id=item.id) }}" class="btn btn-small btn-outline">Edit</a>
+              <form method="POST" action="{{ url_for('admin_delete_item', item_id=item.id) }}" onsubmit="return confirm('Delete this item?');" class="inline-form">
+                <button type="submit" class="btn btn-small btn-outline btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

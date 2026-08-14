@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<section class="hero" style="background-image: url('{{ url_for('static', filename='images/hero_banner.jpg') }}');">
+  <div class="hero-inner">
+    <p class="hero-kicker">欢迎光临 &middot; Welcome to</p>
+    <h1>{{ shop.name }} <span class="cn">{{ shop.name_cn }}</span></h1>
+    <p class="hero-tagline">
+      Lorem ipsum dolor sit amet - traditional Chinese medicine, herbal
+      tonics and therapeutic treatments in the heart of Singapore. 
+    </p>
+    <div class="hero-actions">
+      <a href="{{ url_for('book_appointment') }}" class="btn btn-primary">Book an Appointment</a>
+      <a href="{{ url_for('products_services') }}" class="btn btn-ghost">View Products &amp; Services</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner narrow center">
+    <h2>Lead a vibrant life</h2>
+    <p class="muted">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. For four
+      generations {{ shop.name }} has combined traditional Chinese herbal
+      wisdom with modern care, offering consultations, herbal remedies and
+      hands-on therapies for the whole family. 
+    </p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="section-inner">
+    <div class="section-heading">
+      <h2>Featured Herbs</h2>
+      <a href="{{ url_for('products_services') }}" class="see-all">See all products &amp; services &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {% for herb in herbs %}
+      <div class="item-card">
+        <img src="{{ url_for('static', filename='images/' + herb.image_file) }}" alt="{{ herb.name }}" class="item-img">
+        <h3>{{ herb.name }}</h3>
+        <p class="item-tagline">{{ herb.tagline }}</p>
+        <p class="item-desc">{{ herb.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-heading">
+      <h2>Our Services</h2>
+      <a href="{{ url_for('products_services') }}" class="see-all">See all products &amp; services &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {% for svc in services %}
+      <div class="item-card">
+        <img src="{{ url_for('static', filename='images/' + svc.image_file) }}" alt="{{ svc.name }}" class="item-img">
+        <h3>{{ svc.name }}</h3>
+        <p class="item-tagline">{{ svc.tagline }}</p>
+        <p class="item-desc">{{ svc.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band">
+  <div class="section-inner center">
+    <h2>Ready to feel your best?</h2>
+    <p class="muted">Book an appointment with one of our physicians today.</p>
+    <a href="{{ url_for('book_appointment') }}" class="btn btn-primary">Book an Appointment</a>
+  </div>
+</section>
+
+{% endblock %}

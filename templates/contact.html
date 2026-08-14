@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+
+<section class="page-banner" style="background-image: url('{{ url_for('static', filename='images/contact_banner.jpg') }}');">
+  <div class="page-banner-inner">
+    <p class="breadcrumb">Home / Contact Us</p>
+    <h1>Contact Us</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner contact-layout">
+    <div class="contact-info">
+      <h2>Contact Information</h2>
+      <p><strong>Address</strong><br>{{ shop.address }}</p>
+      <p><strong>Phone</strong><br>{{ shop.phone }}</p>
+      <p><strong>Email</strong><br>{{ shop.email }}</p>
+      <p><strong>Opening Hours</strong><br>{{ shop.hours }}</p>
+
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps?q={{ shop.address | urlencode }}&output=embed"
+          width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <h2>Send Us An Enquiry</h2>
+      <p class="muted">This is a demo form, purpose is to show a confirmation message.</p>
+      <form method="POST" class="stacked-form">
+        <label>Your Name
+          <input type="text" name="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Phone
+          <input type="tel" name="phone">
+        </label>
+        <label>Message
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">Send Enquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Book an Appointment{% endblock %}
+{% block content %}
+
+<section class="page-banner" style="background-image: url('{{ url_for('static', filename='images/contact_banner.jpg') }}');">
+  <div class="page-banner-inner">
+    <p class="breadcrumb">Home / Book an Appointment</p>
+    <h1>Booking Form</h1>
+    <p class="muted">For enquiries, please call {{ shop.phone }}. We'll confirm your appointment as soon as possible.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="form-card">
+    <form method="POST" class="stacked-form">
+      <label>Your Name *
+        <input type="text" name="full_name" value="{{ current_user.name or '' }}" required>
+      </label>
+
+      <div class="form-row">
+        <label>Email *
+          <input type="email" name="email" required>
+        </label>
+        <label>Phone *
+          <input type="tel" name="phone" required>
+        </label>
+      </div>
+
+      <label>Service / Treatment *
+        <select name="service_name" required>
+          <option value="">-- Please choose an option --</option>
+          {% for svc in services %}
+            <option value="{{ svc.name }}">{{ svc.name }}</option>
+          {% endfor %}
+          <option value="General Consultation">General Consultation</option>
+        </select>
+      </label>
+
+      <div class="form-row">
+        <label>Preferred Date *
+          <input type="date" name="preferred_date" min="{{ today }}" required>
+        </label>
+        <label>Preferred Time *
+          <input type="time" name="preferred_time" min="10:00" max="18:00" required>
+        </label>
+      </div>
+
+      <label>Anything for us to note?
+        <textarea name="notes" rows="4" placeholder="e.g. first visit, existing condition, allergies..."></textarea>
+      </label>
+
+      <p class="muted small">*Appointments are subject to availability and confirmation. Our team will contact you to confirm the booking.</p>
+
+      <button type="submit" class="btn btn-primary btn-block">Send Booking Request</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

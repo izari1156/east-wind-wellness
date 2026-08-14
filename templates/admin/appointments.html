@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Manage Appointments{% endblock %}
+{% block content %}
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-heading">
+      <h2>Manage Appointments</h2>
+    </div>
+
+    <div class="filter-tabs">
+      <a href="{{ url_for('admin_appointments', status='all') }}" class="{{ 'active' if status_filter == 'all' }}">All</a>
+      <a href="{{ url_for('admin_appointments', status='pending') }}" class="{{ 'active' if status_filter == 'pending' }}">Pending</a>
+      <a href="{{ url_for('admin_appointments', status='confirmed') }}" class="{{ 'active' if status_filter == 'confirmed' }}">Confirmed</a>
+      <a href="{{ url_for('admin_appointments', status='completed') }}" class="{{ 'active' if status_filter == 'completed' }}">Completed</a>
+      <a href="{{ url_for('admin_appointments', status='cancelled') }}" class="{{ 'active' if status_filter == 'cancelled' }}">Cancelled</a>
+    </div>
+
+    {% if appointments %}
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Customer</th><th>Contact</th><th>Service</th><th>Date</th><th>Time</th>
+            <th>Notes</th><th>Status</th><th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in appointments %}
+          <tr>
+            <td>{{ a.full_name }}</td>
+            <td>{{ a.email }}<br>{{ a.phone }}</td>
+            <td>{{ a.service_name }}</td>
+            <td>{{ a.preferred_date }}</td>
+            <td>{{ a.preferred_time }}</td>
+            <td>{{ a.notes or '-' }}</td>
+            <td><span class="status-pill status-{{ a.status }}">{{ a.status }}</span></td>
+            <td>
+              <form method="POST" action="{{ url_for('admin_update_appointment_status', appointment_id=a.id) }}" class="inline-form">
+                <select name="status" onchange="this.form.submit()">
+                  <option value="pending" {{ 'selected' if a.status == 'pending' }}>Pending</option>
+                  <option value="confirmed" {{ 'selected' if a.status == 'confirmed' }}>Confirmed</option>
+                  <option value="completed" {{ 'selected' if a.status == 'completed' }}>Completed</option>
+                  <option value="cancelled" {{ 'selected' if a.status == 'cancelled' }}>Cancelled</option>
+                </select>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="muted">No appointments in this category.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

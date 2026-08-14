@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Products &amp; Services{% endblock %}
+{% block content %}
+
+<section class="page-banner" style="background-image: url('{{ url_for('static', filename='images/about_banner.jpg') }}');">
+  <div class="page-banner-inner">
+    <p class="breadcrumb">Home / Products &amp; Services</p>
+    <h1>Product and Services</h1>
+    <p class="muted">Browse our herbs and treatments below. Ready to try one? <a href="{{ url_for('book_appointment') }}">Book an appointment</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-heading">
+      <h2>Herbs &amp; Tonics</h2>
+    </div>
+    <div class="card-grid">
+      {% for herb in herbs %}
+      <div class="item-card">
+        <img src="{{ url_for('static', filename='images/' + herb.image_file) }}" alt="{{ herb.name }}" class="item-img">
+        <h3>{{ herb.name }}</h3>
+        <p class="item-tagline">{{ herb.tagline }}</p>
+        <p class="item-desc">{{ herb.description }}</p>
+      </div>
+      {% endfor %}
+      {% if not herbs %}
+        <p class="muted">No herbs added yet. Check back soon!</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="section-inner">
+    <div class="section-heading">
+      <h2>Treatments &amp; Services</h2>
+    </div>
+    <div class="card-grid">
+      {% for svc in services %}
+      <div class="item-card">
+        <img src="{{ url_for('static', filename='images/' + svc.image_file) }}" alt="{{ svc.name }}" class="item-img">
+        <h3>{{ svc.name }}</h3>
+        <p class="item-tagline">{{ svc.tagline }}</p>
+        <p class="item-desc">{{ svc.description }}</p>
+        <a href="{{ url_for('book_appointment') }}" class="btn btn-small">Book this</a>
+      </div>
+      {% endfor %}
+      {% if not services %}
+        <p class="muted">No services added yet. Check back soon!</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

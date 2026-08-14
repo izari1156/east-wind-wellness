@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}About Us{% endblock %}
+{% block content %}
+
+<section class="page-banner" style="background-image: url('{{ url_for('static', filename='images/about_banner.jpg') }}');">
+  <div class="page-banner-inner">
+    <p class="breadcrumb">Home / About Us</p>
+    <h1>About {{ shop.name }}</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner narrow center">
+    <h2>Our Story</h2>
+    <p class="muted">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. {{ shop.name }}
+      {{ shop.name_cn }} was founded with a simple belief - that traditional
+      Chinese medicine, practised with care, can help people feel better
+      every day. 
+    </p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="section-inner">
+    <div class="section-heading center">
+      <h2>Meet Our Team</h2>
+      <p class="muted">Placeholder profiles below - photos are generated illustrations and bios are lorem ipsum text. Swap in your real team details whenever you're ready.</p>
+    </div>
+    <div class="team-grid">
+      {% for member in team %}
+      <div class="team-card">
+        <img src="{{ url_for('static', filename='images/' + member.photo) }}" alt="{{ member.name }}" class="team-photo">
+        <h3>{{ member.name }}</h3>
+        <p class="team-title">{{ member.title }}</p>
+        <p class="team-bio">{{ member.bio }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band">
+  <div class="section-inner center">
+    <h2>Come visit us</h2>
+    <p class="muted">{{ shop.address }} &middot; {{ shop.phone }}</p>
+    <a href="{{ url_for('book_appointment') }}" class="btn btn-primary">Book an Appointment</a>
+  </div>
+</section>
+
+{% endblock %}
