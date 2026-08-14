@@ -17,14 +17,14 @@ Open a terminal in this folder and run:
 
 ```bash
 # (optional but recommended) create a virtual environment
-python3 -m venv venv             # or python -m venv venv
+python3 -m venv venv             
 source venv/bin/activate        # on Windows: venv\Scripts\activate
 
 # install the one dependency
 pip install -r requirements.txt
 
 # run the website 
-python3 app.py #python app.py if error
+python3 app.py 
 ```
 
 Then proced to open **http://127.0.0.1:5000** in your browser.
